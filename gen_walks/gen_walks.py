@@ -41,7 +41,7 @@ op.add_option('--dimensions', dest="dimensions", type=int, default=50,
 op.add_option('--window_size', dest="window_size", type=int, default=10,
               help='Context size for optimization. Default is 10.')
 op.add_option('--iter', dest="iter", default=5, type=int, help='Number of epochs in SGD')
-op.add_option('--workers', dest="workers", type=int, default=10, help='Number of parallel workers.')
+op.add_option('--workers', dest="workers", type=int, default=30, help='Number of parallel workers.')
 
 (opts, args) = op.parse_args()
 if len(args) > 0:
@@ -74,6 +74,8 @@ edge_to_weight = dict()
 pseudo_count = 0.01
 
 def get_global_info():
+  print(global_graph_file)
+  sys.stdout.flush()
   rfile = open(global_graph_file, 'r')
   for line in rfile:
     # print()
@@ -218,6 +220,7 @@ def read_graphs(which_set):
     graph_cnt += 1
     if graph_cnt % 1000 == 0: print("Processed graphs in %s set: %d/%d"%(which_set, graph_cnt, num_graphs))
   print("--- %.2f seconds per graphs in %s set ---" % ((time.time() - start_time)/graph_cnt, which_set))
+  sys.stdout.flush()
   rfile.close()
   write_file.close()
 
@@ -240,12 +243,16 @@ def learn_embeddings(walks, embeding_size):
   model.save_word2vec_format(embed_file)
 
 if __name__ == "__main__":
+  print("__START__")
   get_global_info()
   for which_set in sets:
     read_graphs(which_set)
 
   print("Train word2vec with dimension " + str(opts.dimensions))
+  sys.stdout.flush()
   walks = list()
   read_walks_set(sets[0], walks)
 
   learn_embeddings(walks, opts.dimensions)
+  print("___END__")
+  sys.stdout.flush()

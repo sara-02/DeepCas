@@ -5,6 +5,8 @@ import sys
 DATA_PATH = '../data/test-net/'
 
 LABEL_NUM = 2
+print(LABEL_NUM)
+sys.stdout.flush()
 
 graphs_train = {}
 with open(DATA_PATH + 'random_walks_train.txt', 'r') as f:

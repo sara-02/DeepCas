@@ -1,0 +1,6 @@
+*.pkl
+*.pyc
+*.txt
+env*/
+data/test-net
+*nohup*.out

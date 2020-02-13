@@ -17,7 +17,7 @@ delta_t = args.dt
 main_dir = os.path.join("../","data","test-net")
 file_name = os.path.join(main_dir,"nov_test"+delta_t+".json")
 k = 10
-bins = np.log2((np.array([0.00001, 2,3, 4, 5, np.inf])*k))
+bins = np.log((np.array([0.00001, 2,3, 4, 5, np.inf])*k))
 l_pred=[]
 l_ground=[]
 with open(file_name, "r") as f:

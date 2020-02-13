@@ -209,7 +209,7 @@ class DeepCas(object):
                     p_geo = tf.sigmoid(self.a_geo)
                     attention_batch = tf.pow(
                         tf.mul(p_geo, tf.ones_like(self.sz)),
-                        tf.div(1.0 + tf.log(self.sz), tf.log(2.0)))
+                        tf.div(1.0 + tf.log(self.sz), 1.0))
 
                     attention_batch_seq = tf.tile(
                         attention_batch, [1, self.sequence_batch_size])

@@ -121,7 +121,7 @@ for key,graph in graphs_train.items():
                 walk.append(-1)
         temp.append(index.new(walk))
     x_data.append(temp)
-    y_data.append(np.log(y+1.0)/np.log(2.0))
+    y_data.append(np.log(y+1.0))
     sz_data.append(sizes_train[key])
     
 pickle.dump((x_data, y_data, sz_data, index.length()), open('../data/data_train_'+str(LABEL_NUM)+'.pkl','w'))
@@ -139,7 +139,7 @@ for key,graph in graphs_val.items():
                 walk.append(-1)
         temp.append(index.new(walk))
     x_data.append(temp)
-    y_data.append(np.log(y+1.0)/np.log(2.0))
+    y_data.append(np.log(y+1.0))
     sz_data.append(sizes_val[key])
     
 pickle.dump((x_data, y_data, sz_data, index.length()), open('../data/data_val_'+str(LABEL_NUM)+'.pkl','w'))
@@ -157,7 +157,7 @@ for key,graph in graphs_test.items():
                 walk.append(-1)
         temp.append(index.new(walk))
     x_data.append(temp)
-    y_data.append(np.log(y+1.0)/np.log(2.0))
+    y_data.append(np.log(y+1.0))
     sz_data.append(sizes_test[key])
     
 pickle.dump((x_data, y_data, sz_data, index.length()), open('../data/data_test_'+str(LABEL_NUM)+'.pkl','w'))

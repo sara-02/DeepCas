@@ -10,7 +10,7 @@ tf.set_random_seed(0)
 import time
 
 NUM_THREADS = 100
-delta_t = 30
+delta_t = 1
 print(delta_t)
 sys.stdout.flush()
 tf.flags.DEFINE_float("learning_rate", 0.01, "learning_rate.")
@@ -49,11 +49,11 @@ def get_batch(x, y, sz, step, batch_size=128):
     return batch_x, batch_y, batch_sz
 
 version = config.version
-x_train, y_train, sz_train, vocabulary_size = pickle.load(open('../data/data_train_2.pkl','r'))
+x_train, y_train, sz_train, vocabulary_size = pickle.load(open('../data/data_train_0.pkl','r'))
 print(len(x_train), len(y_train), len(sz_train))
-x_test, y_test, sz_test, _ = pickle.load(open('../data/data_test_2.pkl','r'))
+x_test, y_test, sz_test, _ = pickle.load(open('../data/data_test_0.pkl','r'))
 print(len(x_test), len(y_test), len(sz_test))
-x_val, y_val, sz_val, _ = pickle.load(open('../data/data_val_2.pkl','r'))
+x_val, y_val, sz_val, _ = pickle.load(open('../data/data_val_0.pkl','r'))
 print(len(x_val), len(y_val), len(sz_val))
 node_vec = pickle.load(open('../data/node_vec.pkl', 'r'))
 
@@ -71,7 +71,7 @@ best_val_loss = 1000
 best_test_loss = 1000
 # Keep training until reach max iterations or max_try
 train_loss = []
-max_try = 10
+max_try = 5
 patience = max_try
 while step * batch_size < training_iters:
     batch_x, batch_y, batch_sz = get_batch(x_train, y_train, sz_train, step, batch_size=batch_size)

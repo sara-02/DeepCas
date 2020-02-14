@@ -53,6 +53,8 @@ for i in range(n):
     key = list(each_reddit.keys())[0]
     each_reddit = each_reddit[key]
     for each_post in each_reddit:
+        #print("inside_post",each_post['id'])
+        sys.stdout.flush()
         if len(each_post['comments']) < 10:
             continue
         user_id = each_post['id']
@@ -61,7 +63,7 @@ for i in range(n):
             user_id_count = updated_mapping(user_id)
         else:
             user_id_count = updated_mapping(real_name)
-        prev_comments = []
+        #prev_comments = []
         for each_comment in each_post['comments']:
             comment_id = each_comment['id']
             real_name = commenter_ids[comment_id]
@@ -75,12 +77,12 @@ for i in range(n):
             else:
                 g.add_edge(user_id_count, comment_id_count, weight=1)
 
-            for each_edge in prev_comments:
-                if g.has_edge(each_edge, comment_id_count):
-                    g[each_edge][comment_id_count]['weight'] += 0.25
-                else:
-                    g.add_edge(each_edge, comment_id_count, weight=0.25)
-            prev_comments.append(comment_id_count)
+            #for each_edge in prev_comments:
+               # if g.has_edge(each_edge, comment_id_count):
+                   # g[each_edge][comment_id_count]['weight'] += 0.25
+                #else:
+                   # g.add_edge(each_edge, comment_id_count, weight=0.25)
+            #prev_comments.append(comment_id_count)
 
 assert len(user_count_mapping) == g.number_of_nodes()
 
